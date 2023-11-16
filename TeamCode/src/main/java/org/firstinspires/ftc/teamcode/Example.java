@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 /*
  * This OpMode executes a Tank Drive control TeleOp a direct drive robot
@@ -124,6 +125,8 @@ public class Example extends OpMode{
      */
     @Override
     public void start() {
+        LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     /*
@@ -154,10 +157,10 @@ public class Example extends OpMode{
 
         // code that controles LinearSlide
         slide_encoder=LinearSlide.getCurrentPosition();
-        if (gamepad1.y)
-            LinearSlide.setPower(.2);
-        else if (gamepad1.a)
-            LinearSlide.setPower(-.2);
+        if (gamepad1.y & slide_encoder<350)
+            LinearSlide.setPower(.4);
+        else if (gamepad1.a & slide_encoder>20)
+            LinearSlide.setPower(-.4);
         else
             LinearSlide.setPower(0);
 

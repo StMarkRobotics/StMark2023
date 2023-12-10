@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /*
  * This OpMode executes a Tank Drive control TeleOp a direct drive robot
@@ -57,7 +58,7 @@ public class Example extends OpMode{
     public DcMotor  Motor2  = null;
     public DcMotor  Motor4  = null;
   //  public DcMotor  leftArm     = null;
-   // public Servo    leftClaw    = null;
+    public Servo Launcher    = null;
    // public Servo    rightClaw   = null;
     public DcMotor  LinearSlide =null;
 
@@ -83,13 +84,14 @@ public class Example extends OpMode{
         Motor4 = hardwareMap.get(DcMotor.class, "Motor4");
        // leftArm    = hardwareMap.get(DcMotor.class, "left_arm");
         LinearSlide    = hardwareMap.get(DcMotor.class, "LinearSlide");
+        Launcher = hardwareMap.get(Servo.class, "Launcher");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left and right sticks forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
         Motor1.setDirection(DcMotor.Direction.REVERSE);
         Motor3.setDirection(DcMotor.Direction.REVERSE);
-        Motor2.setDirection(DcMotor.Direction.FORWARD);
+        Motor2.setDirection(DcMotor.Direction.REVERSE);
         Motor4.setDirection(DcMotor.Direction.FORWARD);
 
         // encoder for linear slide
@@ -137,17 +139,24 @@ public class Example extends OpMode{
         double y1;
         double x1;
         double x2;
+        double y2;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forward, so negate it)
         y1 = -gamepad1.left_stick_y;
         x1 = -gamepad1.left_stick_x;
-        x2 = -gamepad1.right_stick_y;
+        x2 = -gamepad1.right_stick_x;
+        y2=-gamepad1.right_stick_y;
+
 
         Motor1.setPower(y1+x1+x2);
         Motor3.setPower(y1-x1+x2);
         Motor2.setPower(y1+x1-x2);
         Motor4.setPower(y1-x1-x2);
 
+    // airplane launcher
+
+        //if ()
+        //Launcher.setPower(.2);
 
         // Use gamepad left & right Bumpers to open and close the claw
        // if (gamepad1.right_bumper)
@@ -164,7 +173,8 @@ public class Example extends OpMode{
         else
             LinearSlide.setPower(0);
 
-
+        // code that controles Launcher
+        //if (Launcher.setPosition(0.7);
 
 
         // Move both servos to new position.  Assume servos are mirror image of each other.

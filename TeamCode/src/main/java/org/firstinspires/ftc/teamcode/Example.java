@@ -148,15 +148,21 @@ public class Example extends OpMode{
         y2=-gamepad1.right_stick_y;
 
 
-        Motor1.setPower(y1+x1+x2);
+        /*Motor1.setPower(y1+x1+x2);
         Motor3.setPower(y1-x1+x2);
         Motor2.setPower(y1+x1-x2);
+        Motor4.setPower(y1-x1-x2);*/
+
+        Motor1.setPower(y1-x1+x2);
+        Motor3.setPower(y1+x1-x2);
+        Motor2.setPower(y1+x1+x2);
         Motor4.setPower(y1-x1-x2);
 
     // airplane launcher
-
-        //if ()
-        //Launcher.setPower(.2);
+        if (gamepad1.x)
+            Launcher.setPosition(.8);
+        else
+            Launcher.setPosition(.5);
 
         // Use gamepad left & right Bumpers to open and close the claw
        // if (gamepad1.right_bumper)

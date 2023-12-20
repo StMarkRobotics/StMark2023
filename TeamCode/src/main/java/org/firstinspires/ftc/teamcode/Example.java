@@ -61,7 +61,8 @@ public class Example extends OpMode{
     public Servo Launcher    = null;
    // public Servo    rightClaw   = null;
     public DcMotor  LinearSlide =null;
-
+    public Servo Claw1 =null;
+    public Servo Claw2 =null;
     double clawOffset = 0;
 
     public static final double MID_SERVO   =  0.5 ;
@@ -85,6 +86,8 @@ public class Example extends OpMode{
        // leftArm    = hardwareMap.get(DcMotor.class, "left_arm");
         LinearSlide    = hardwareMap.get(DcMotor.class, "LinearSlide");
         Launcher = hardwareMap.get(Servo.class, "Launcher");
+        Claw1 = hardwareMap.get(Servo.class, "Claw1");
+        Claw2 = hardwareMap.get(Servo.class, "Claw2");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left and right sticks forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -98,6 +101,7 @@ public class Example extends OpMode{
 
         LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        // Claw 1 and Claw 2
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -163,6 +167,18 @@ public class Example extends OpMode{
             Launcher.setPosition(.8);
         else
             Launcher.setPosition(.5);
+
+        if(gamepad2.right_bumper){
+            //Claw Open
+            Claw1.setPosition(0.5);
+            Claw2.setPosition(0.5);
+        }
+        if (gamepad2.left_bumper) {
+            //Claw Close
+            Claw1.setPosition(0.3);
+            Claw2.setPosition(0.3);
+        }
+
 
         // Use gamepad left & right Bumpers to open and close the claw
        // if (gamepad1.right_bumper)

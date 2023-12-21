@@ -170,13 +170,13 @@ public class Example extends OpMode{
 
         if(gamepad2.right_bumper){
             //Claw Open
-            Claw1.setPosition(0.5);
-            Claw2.setPosition(0.5);
+            Claw1.setPosition(0.4);
+            Claw2.setPosition(0.6);
         }
         if (gamepad2.left_bumper) {
             //Claw Close
-            Claw1.setPosition(0.3);
-            Claw2.setPosition(0.3);
+            Claw1.setPosition(0.6);
+            Claw2.setPosition(0.4);
         }
 
 

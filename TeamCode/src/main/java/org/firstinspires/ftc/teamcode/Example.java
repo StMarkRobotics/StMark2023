@@ -63,6 +63,8 @@ public class Example extends OpMode{
     public DcMotor  LinearSlide =null;
     public Servo Claw1 =null;
     public Servo Claw2 =null;
+
+    public Servo Wrist =null;
     double clawOffset = 0;
 
     public static final double MID_SERVO   =  0.5 ;
@@ -88,6 +90,7 @@ public class Example extends OpMode{
         Launcher = hardwareMap.get(Servo.class, "Launcher");
         Claw1 = hardwareMap.get(Servo.class, "Claw1");
         Claw2 = hardwareMap.get(Servo.class, "Claw2");
+        Wrist = hardwareMap.get(Servo.class, "Wrist");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left and right sticks forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -163,20 +166,34 @@ public class Example extends OpMode{
         Motor4.setPower(y1-x1-x2);
 
     // airplane launcher
-        if (gamepad1.x)
-            Launcher.setPosition(.8);
+        if (gamepad2.dpad_up)
+            Launcher.setPosition(1);
         else
-            Launcher.setPosition(.5);
+            Launcher.setPosition(.3);
 
         if(gamepad2.right_bumper){
             //Claw Open
-            Claw1.setPosition(0.4);
-            Claw2.setPosition(0.6);
+            Claw1.setPosition(0.8);
+            Claw2.setPosition(0.4);
         }
         if (gamepad2.left_bumper) {
             //Claw Close
-            Claw1.setPosition(0.6);
-            Claw2.setPosition(0.4);
+            Claw1.setPosition(0);
+            Claw2.setPosition(1);
+        }
+
+        if (gamepad2.x) {
+
+            Wrist.setPosition(0.17 );
+        }
+
+         else if (gamepad2.b) {
+
+            Wrist.setPosition(0.4);
+        }
+
+         else {
+             Wrist.setPosition(0.5);
         }
 
 
@@ -188,9 +205,9 @@ public class Example extends OpMode{
 
         // code that controles LinearSlide
         slide_encoder=LinearSlide.getCurrentPosition();
-        if (gamepad1.y & slide_encoder<350)
+        if (gamepad2.y & slide_encoder<140)
             LinearSlide.setPower(.4);
-        else if (gamepad1.a & slide_encoder>20)
+        else if (gamepad2.a & slide_encoder>0)
             LinearSlide.setPower(-.4);
         else
             LinearSlide.setPower(0);

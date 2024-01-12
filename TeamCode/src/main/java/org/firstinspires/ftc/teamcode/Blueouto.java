@@ -31,18 +31,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import java.util.List;
+import org.firstinspires.ftc.vision.VisionPortal;
 
 /*
  * This OpMode illustrates the concept of driving a path based on time.
@@ -63,9 +56,9 @@ import java.util.List;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: Auto Drive By Time", group="Robot")
+@Autonomous(name="Robot: Blueouto", group="Robot")
 //@Disabled
-public class AutoTest extends LinearOpMode {
+public class Blueouto extends LinearOpMode {
 
     /*private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
@@ -261,10 +254,10 @@ public class AutoTest extends LinearOpMode {
         resetRuntime();
 
         while (runtime.seconds()<2) {
-            Motor1.setPower(.2);
-            Motor4.setPower(-.2);
-            Motor2.setPower(-.2);
-            Motor1.setPower(.2);
+            Motor1.setPower(-.2);
+            Motor4.setPower(.2);
+            Motor2.setPower(.2);
+            Motor1.setPower(-.2);
         }
         sleep(1000);
 

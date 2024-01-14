@@ -31,18 +31,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import java.util.List;
 
 /*
  * This OpMode illustrates the concept of driving a path based on time.
@@ -63,24 +54,24 @@ import java.util.List;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: Auto Drive By Time", group="Robot")
+@Autonomous(name="Robot: Long_Blue_outo", group="Robot")
 //@Disabled
-public class AutoTest extends LinearOpMode {
+public class Long_Blue_outo extends LinearOpMode {
 
-    /*private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
+    //private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
     /**
      * The variable to store our instance of the TensorFlow Object Detection processor.
      */
 
-    //private static final String TFOD_MODEL_ASSET = "Cone.tflite";
+    //private static final String TFOD_MODEL_ASSET = "Red_Block_tflite";
 
 
-    // private static final String TFOD_MODEL_FILE = "/sdcard/FIRST/tflitemodels/myCustomModel.tflite";
+    //private static final String TFOD_MODEL_FILE = "/sdcard/FIRST/tflitemodels/myCustomModel.tflite";
 
-    // private static final String[] LABELS = {
-    //        "Cone",
-    // };
+    //private static final String[] LABELS = {
+    //        "Red Block",
+    //};
 
     /**
      * The variable to store our instance of the TensorFlow Object Detection processor.
@@ -91,7 +82,7 @@ public class AutoTest extends LinearOpMode {
      * The variable to store our instance of the vision portal.
      */
 
-    private VisionPortal visionPortal;
+    //private VisionPortal visionPortal;
 
     /* Declare OpMode members. */
     public DcMotor Motor1 = null;
@@ -108,7 +99,7 @@ public class AutoTest extends LinearOpMode {
     public Servo Wrist = null;
     public int slide_encoder = 0;
 
-    public int Motor_encoder_start = 0;
+    //public int Motor_encoder_start = 0;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -133,7 +124,7 @@ public class AutoTest extends LinearOpMode {
         Wrist = hardwareMap.get(Servo.class, "Wrist");
         LinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        Motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        /*Motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -141,7 +132,7 @@ public class AutoTest extends LinearOpMode {
         Motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Motor3.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Motor4.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Motor4.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
 
         Motor1.setDirection(DcMotor.Direction.REVERSE);
         Motor3.setDirection(DcMotor.Direction.REVERSE);
@@ -156,16 +147,16 @@ public class AutoTest extends LinearOpMode {
 
 
         // Wait for the DS start button to be touched.
-        /*telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
+        telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
         telemetry.addData(">", "Touch Play to start OpMode");
         telemetry.update();
-        waitForStart();*/
+        waitForStart();
 
 
-        //double x = 0;
+        // double x = 0;
 
         /*if (opModeIsActive()) {
-            //while (opModeIsActive()) {
+            while (opModeIsActive()) {
 
                 x = telemetryTfod();
 
@@ -181,9 +172,9 @@ public class AutoTest extends LinearOpMode {
 
                 // Share the CPU.
                 sleep(20);
-           // }
-        }*/
-
+            }
+        }
+        */
 
         //telemetry.addData("Image x:", "%.0f", x);
 
@@ -198,12 +189,17 @@ public class AutoTest extends LinearOpMode {
 
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Ready to run");    //
+        telemetry.addData("Status", "Ready to run");
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
-        Motor_encoder_start = Motor1.getCurrentPosition();
+        //Motor_encoder_start = Motor1.getCurrentPosition();
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
+
+
+        Claw1.setPosition(0);
+        Claw2.setPosition(1);
+
 
         // Step 1:  Drive forward for 3 seconds
        /* Motor1.setPower(FORWARD_SPEED);
@@ -219,75 +215,188 @@ public class AutoTest extends LinearOpMode {
 
         runtime.reset();
 
-        /*while(opModeIsActive() && runtime.seconds()<2) {
-            if (x > 1 && x < 100) {
-                Motor1.setPower(.3);
-                Motor3.setPower(-.3);
-                Motor2.setPower(.3);
-                Motor4.setPower(-.3);
+        Motor1.setPower(.3);
+        Motor2.setPower(.3);
+        Motor3.setPower(-.3);
+        Motor4.setPower(-.3);
+
+        sleep(6000);
+
+
+            /*if (x > 1 && x < 100) {
 
                 telemetry.addData("Direction", "left");
 
+                Motor1.setPower(.3);
+                Motor3.setPower(.3);
+                Motor2.setPower(-.3);
+                Motor4.setPower(-.3);
+
+                sleep(2000);
+
+                Motor1.setPower(0);
+                Motor3.setPower(0);
+                Motor2.setPower(0);
+                Motor4.setPower(0);
+
+                while(opModeIsActive() && runtime.seconds()<2) {
+
+                    sleep(1000);
+
+                    Motor1.setPower(.3);
+                    Motor3.setPower(.3);
+                    Motor2.setPower(.3);
+                    Motor4.setPower(.3);
+
+                    sleep(1000);
+
+                    Wrist.setPosition(.17);
+
+                    sleep(1000);
+
+                    Wrist.setPosition(.5);
+
+                    sleep(1000);
+
+                    Motor1.setPower(-.3);
+                    Motor3.setPower(-.3);
+                    Motor2.setPower(.3);
+                    Motor4.setPower(.3);
+                }
             }
             else if (x > 100 && x < 500) {
+
+                telemetry.addData("Direction", "straight");
                 Motor1.setPower(.3);
                 Motor3.setPower(.3);
                 Motor2.setPower(.3);
                 Motor4.setPower(.3);
 
-                telemetry.addData("Direction", "straight");
+                sleep(2000);
+                Motor1.setPower(0);
+                Motor3.setPower(0);
+                Motor2.setPower(0);
+                Motor4.setPower(0);
 
+                while(opModeIsActive() && runtime.seconds()<2) {
+
+                    sleep(1000);
+
+                    Motor1.setPower(.3);
+                    Motor3.setPower(.3);
+                    Motor2.setPower(.3);
+                    Motor4.setPower(.3);
+
+                    sleep(1000);
+
+                    Wrist.setPosition(.17);
+
+                    sleep(1000);
+
+                    Wrist.setPosition(.5);
+
+                    sleep(1000);
+
+                    Motor1.setPower(-.3);
+                    Motor3.setPower(-.3);
+                    Motor2.setPower(.3);
+                    Motor4.setPower(.3);
+                }
             }
             else if ((x > 500) && x < 640) {
+
+                telemetry.addData("Direction", "right");
+
                 Motor1.setPower(-.3);
                 Motor3.setPower(.3);
                 Motor2.setPower(-.3);
                 Motor4.setPower(.3);
 
-                telemetry.addData("Direction", "right");
+                sleep(2000);
+
+                Motor1.setPower(0);
+                Motor3.setPower(0);
+                Motor2.setPower(0);
+                Motor4.setPower(0);
+
+                while(opModeIsActive() && runtime.seconds()<2) {
+
+                    sleep(1000);
+
+                    Motor1.setPower(.3);
+                    Motor3.setPower(.3);
+                    Motor2.setPower(.3);
+                    Motor4.setPower(.3);
+
+                    sleep(1000);
+
+                    Wrist.setPosition(.17);
+
+                    sleep(1000);
+
+                    Wrist.setPosition(.5);
+
+                    sleep(1000);
+
+                    Motor1.setPower(-.3);
+                    Motor3.setPower(-.3);
+                    Motor2.setPower(.3);
+                    Motor4.setPower(.3);
+                }
             }
 
             else {
-                sleep(20);
-            }
-            telemetry.update();
-        }
-        Motor1.setPower(0);
+
+                Motor1.setPower(.3);
+                Motor3.setPower(.3);
+                Motor2.setPower(.3);
+                Motor4.setPower(.3);
+
+                sleep(2000);
+
+                Motor1.setPower(.0);
+                Motor3.setPower(.0);
+                Motor2.setPower(.0);
+                Motor4.setPower(.0);
+
+                Wrist.setPosition(.17);
+
+                sleep(1000);
+
+                Wrist.setPosition(.5);
+            }*/
+        telemetry.update();
+
+
+
+        /*Motor1.setPower(0);
         Motor2.setPower(0);
         Motor3.setPower(0);
         Motor4.setPower(0);
 
-        sleep(10000);*/
+        sleep(10000);
         resetRuntime();
 
         while (runtime.seconds()<2) {
-            Motor1.setPower(.2);
-            Motor4.setPower(-.2);
-            Motor2.setPower(-.2);
-            Motor1.setPower(.2);
+            Motor1.setPower(-.2);
+            Motor4.setPower(.2);
+            Motor2.setPower(.2);
+            Motor3.setPower(-.2);
         }
-        sleep(1000);
+        sleep(1000);*/
 
-        Wrist.setPosition(.2);
-
-        sleep(2000);
-        Claw1.setPosition(1);
-        Claw2.setPosition(0);
-
+       // Wrist.setPosition(.2);
 
         // ato code for moving the claw.
-        Claw1.setPosition(1);
-        Claw2.setPosition(0);
-        sleep(3000);
 
-        LinearSlide.setPower(.4);
+        /*LinearSlide.setPower(.4);
         runtime.reset();
         slide_encoder = LinearSlide.getCurrentPosition();
         while (opModeIsActive() && slide_encoder < 100) {
             slide_encoder = LinearSlide.getCurrentPosition();
             telemetry.addData("LinearSlide Encoder", "%d", slide_encoder);
             telemetry.update();
-        }
+        }*/
 
         /*LinearSlide.setPower(-.4);
         runtime.reset();
@@ -329,13 +438,14 @@ public class AutoTest extends LinearOpMode {
         telemetry.update();
         sleep(1000);
 
-        // visionPortal.close();
+        //  visionPortal.close();
     }
 }
+
     /**
      * Initialize the TensorFlow Object Detection processor.
      */
-    /*private void initTfod() {
+   /* private void initTfod() {
 
 
         // Create the TensorFlow processor by using a builder.
@@ -405,9 +515,9 @@ public class AutoTest extends LinearOpMode {
      *
      * @return
      */
-    //public double telemetryTfod() {
+   /* public double telemetryTfod() {
 
-        /*List<Recognition> currentRecognitions = tfod.getRecognitions();
+        List<Recognition> currentRecognitions = tfod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());
 
         // Step through the list of recognitions and display info for each one.
@@ -424,5 +534,4 @@ public class AutoTest extends LinearOpMode {
         }   // end for() loop
         return x;
     }
-}
-*/
+}*/

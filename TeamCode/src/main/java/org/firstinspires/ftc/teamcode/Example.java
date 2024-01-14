@@ -149,9 +149,12 @@ public class Example extends OpMode{
         double y2;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forward, so negate it)
-        y1 = -gamepad1.left_stick_y;
+        y1 = -gamepad1.right_stick_x;
         x1 = -gamepad1.left_stick_x;
-        x2 = -gamepad1.right_stick_x;
+        x2 = -gamepad1.right_stick_y;
+        //y1 = -gamepad1.right_stick_x;
+        //x1 = -gamepad1.left_stick_x;
+        //x2 = -gamepad1.right_stick_x;
         y2=-gamepad1.right_stick_y;
 
 
@@ -231,9 +234,9 @@ public class Example extends OpMode{
 
         // Send telemetry message to signify robot running;
         // telemetry.addData("claw",  "Offset = %.2f", clawOffset);
-        //telemetry.addData("y1",  "%.2f", y1);
-        //telemetry.addData("x1", "%.2f", x1);
-        //telemetry.addData("x2", "%.2f", x2);
+        telemetry.addData("y1",  "%.2f", y1);
+        telemetry.addData("x1", "%.2f", x1);
+        telemetry.addData("x2", "%.2f", x2);
         telemetry.addData("LinearSlide Encoder", "%d", slide_encoder);
     }
 

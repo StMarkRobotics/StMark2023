@@ -34,14 +34,18 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.GainControl;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.ExposureControl;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /*
  * This OpMode illustrates the concept of driving a path based on time.
@@ -72,13 +76,13 @@ public class Red_outo extends LinearOpMode {
      * The variable to store our instance of the TensorFlow Object Detection processor.
      */
 
-    private static final String TFOD_MODEL_ASSET = "Red_Block_tflite";
+    private static final String TFOD_MODEL_ASSET = "RedBlock.tflite";
 
 
      private static final String TFOD_MODEL_FILE = "/sdcard/FIRST/tflitemodels/myCustomModel.tflite";
 
      private static final String[] LABELS = {
-            "Red Block",
+            "RedBlock",
      };
 
     /**
@@ -114,6 +118,8 @@ public class Red_outo extends LinearOpMode {
 
     static final double FORWARD_SPEED = 0.4;
     static final double TURN_SPEED = 0.2;
+
+    ExposureControl myExposureControl;
 
     @Override
     public void runOpMode() {
@@ -158,6 +164,18 @@ public class Red_outo extends LinearOpMode {
         telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
         telemetry.addData(">", "Touch Play to start OpMode");
         telemetry.update();
+
+        /*ExposureControl exposureControl=visionPortal.getCameraControl(ExposureControl.class);
+        GainControl gainControl=visionPortal.getCameraControl(GainControl.class);
+
+        boolean exposureSupported = exposureControl.isExposureSupported();
+        boolean manualSupported = exposureControl.isModeSupported(ExposureControl.Mode.Manual);
+
+        exposureControl.setMode(ExposureControl.Mode.Manual);
+
+        exposureControl.setExposure(95, TimeUnit.MILLISECONDS);*/
+
+
         waitForStart();
 
 
@@ -203,8 +221,8 @@ public class Red_outo extends LinearOpMode {
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
 
-        Claw1.setPosition(1);
-        Claw2.setPosition(0);
+        //Claw1.setPosition(1);
+        //Claw2.setPosition(0);
 
 
 
@@ -230,103 +248,70 @@ public class Red_outo extends LinearOpMode {
         runtime.reset();
 
 
-            if (x > 1 && x < 100) {
 
-                telemetry.addData("Direction", "left");
-
-                Motor1.setPower(.3);
-                Motor3.setPower(.3);
-                Motor2.setPower(-.3);
-                Motor4.setPower(-.3);
-
-                sleep(2000);
-
-                Motor1.setPower(0);
-                Motor3.setPower(0);
-                Motor2.setPower(0);
-                Motor4.setPower(0);
-
-                while(opModeIsActive() && runtime.seconds()<2) {
-
-                    sleep(1000);
-
-                    Motor1.setPower(.3);
-                    Motor3.setPower(.3);
-                    Motor2.setPower(.3);
-                    Motor4.setPower(.3);
-
-                    sleep(1000);
-
-                    Wrist.setPosition(.17);
-
-                    sleep(1000);
-
-                    Wrist.setPosition(.5);
-
-                    sleep(1000);
-
-                    Motor1.setPower(.3);
-                    Motor3.setPower(.3);
-                    Motor2.setPower(-.3);
-                    Motor4.setPower(-.3);
-                }
-            }
-            else if (x > 100 && x < 500) {
+            if (x > 200 && x < 400) {
 
                 telemetry.addData("Direction", "straight");
-                Motor1.setPower(.3);
-                Motor3.setPower(.3);
-                Motor2.setPower(.3);
-                Motor4.setPower(.3);
 
-                sleep(2000);
+                Wrist.setPosition(.2);
+
+                Motor1.setPower(.2);
+                Motor3.setPower(-.2);
+                Motor2.setPower(.2);
+                Motor4.setPower(-.2);
+
+                sleep(3000);
                 Motor1.setPower(0);
                 Motor3.setPower(0);
                 Motor2.setPower(0);
                 Motor4.setPower(0);
 
-                while(opModeIsActive() && runtime.seconds()<2) {
+                while(opModeIsActive() && runtime.seconds()<6) {
 
                     sleep(1000);
 
-                    Motor1.setPower(.3);
+                    /*Motor1.setPower(.3);
                     Motor3.setPower(.3);
                     Motor2.setPower(.3);
-                    Motor4.setPower(.3);
+                    Motor4.setPower(.3);*/
+
+                    //sleep(1000);
 
                     sleep(1000);
 
-                    Wrist.setPosition(.17);
+                    Wrist.setPosition(0);
 
                     sleep(1000);
 
-                    Wrist.setPosition(.5);
+                    Claw1.setPosition(1);
+                    Claw2.setPosition(0);
 
-                    sleep(1000);
 
-                    Motor1.setPower(.3);
+                    /*Motor1.setPower(.3);
                     Motor3.setPower(.3);
                     Motor2.setPower(-.3);
-                    Motor4.setPower(-.3);
+                    Motor4.setPower(-.3);*/
                 }
             }
-            else if ((x > 500) && x < 640) {
+            else if ((x > 400) && x < 640) {
 
                 telemetry.addData("Direction", "right");
 
-                Motor1.setPower(-.3);
-                Motor3.setPower(-.3);
-                Motor2.setPower(.3);
-                Motor4.setPower(.3);
+                Wrist.setPosition(.2);
 
-                sleep(2000);
+                Motor1.setPower(.2);
+                Motor3.setPower(-.2);
+                Motor2.setPower(.2);
+                Motor4.setPower(-.2);
+
+                sleep(2500);
 
                 Motor1.setPower(0);
                 Motor3.setPower(0);
                 Motor2.setPower(0);
                 Motor4.setPower(0);
 
-                while(opModeIsActive() && runtime.seconds()<2) {
+                while(opModeIsActive() && runtime.seconds()<6) {
 
                     Motor1.setPower(.3);
                     Motor3.setPower(.3);
@@ -335,48 +320,92 @@ public class Red_outo extends LinearOpMode {
 
                     sleep(1000);
 
-                    Wrist.setPosition(.17);
+                    Motor1.setPower(0);
+                    Motor3.setPower(0);
+                    Motor2.setPower(0);
+                    Motor4.setPower(0);
+
+                    Motor1.setPower(-.3);
+                    Motor3.setPower(.3);
+                    Motor2.setPower(.3);
+                    Motor4.setPower(-.3);
 
                     sleep(1000);
 
-                    Wrist.setPosition(.5);
+                    Motor1.setPower(0);
+                    Motor3.setPower(0);
+                    Motor2.setPower(0);
+                    Motor4.setPower(0);
+
+                    sleep(5000);
+
+                    //Wrist.setPosition(1);
 
                     sleep(1000);
 
-                    Motor1.setPower(.3);
+                    Wrist.setPosition(0);
+
+                    sleep(1000);
+
+                    Claw1.setPosition(1);
+                    Claw2.setPosition(0);
+
+
+                    /*Motor1.setPower(.3);
                     Motor3.setPower(.3);
                     Motor2.setPower(-.3);
-                    Motor4.setPower(-.3);
+                    Motor4.setPower(-.3);*/
                 }
             }
 
             else {
 
-                Motor1.setPower(.0);
-                Motor3.setPower(.0);
-                Motor2.setPower(.0);
-                Motor4.setPower(.0);
+                telemetry.addData("Direction", "left");
 
-                sleep(500);
+                Wrist.setPosition(.2);
 
                 Motor1.setPower(.2);
-                Motor3.setPower(.2);
+                Motor3.setPower(-.2);
                 Motor2.setPower(.2);
-                Motor4.setPower(.2);
+                Motor4.setPower(-.2);
 
-                Wrist.setPosition(.17);
-
-                sleep(1000);
-
-                Wrist.setPosition(.5);
-
-                telemetry.update();
-
+                sleep(2500);
 
                 Motor1.setPower(0);
-                Motor2.setPower(0);
                 Motor3.setPower(0);
+                Motor2.setPower(0);
                 Motor4.setPower(0);
+
+
+                while(opModeIsActive() && runtime.seconds()<6) {
+
+                    sleep(1000);
+
+                    Motor1.setPower(.3);
+                    Motor3.setPower(-.3);
+                    Motor2.setPower(-.3);
+                    Motor4.setPower(.3);
+
+                    sleep(1000);
+
+                    Motor1.setPower(0);
+                    Motor3.setPower(0);
+                    Motor2.setPower(0);
+                    Motor4.setPower(0);
+
+                    sleep(5000);
+
+                    //Wrist.setPosition(1);
+
+                    sleep(1000);
+
+                    Wrist.setPosition(0);
+
+                    sleep(1000);
+
+                    Claw1.setPosition(1);
+                    Claw2.setPosition(0);
+                }
             }
         sleep(1000);
         resetRuntime();
@@ -506,10 +535,13 @@ public class Red_outo extends LinearOpMode {
         visionPortal = builder.build();
 
         // Set confidence threshold for TFOD recognitions, at any time.
-        //tfod.setMinResultConfidence(0.75f);
+        tfod.setMinResultConfidence(0.5f);
 
         // Disable or re-enable the TFOD processor at any time.
         //visionPortal.setProcessorEnabled(tfod, true);
+
+        //myExposureControl = vuforia.getCamera().getControl(ExposureControl.class);
+
 
     }   // end method initTfod()
 

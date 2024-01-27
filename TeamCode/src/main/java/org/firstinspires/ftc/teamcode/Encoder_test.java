@@ -99,7 +99,7 @@ public class Encoder_test extends LinearOpMode {
     public Servo Wrist = null;
     public int slide_encoder = 0;
 
-    //public int Motor_encoder_start = 0;
+    public int Motor_encoder_start = 0;
 
     private ElapsedTime runtime = new ElapsedTime();
 

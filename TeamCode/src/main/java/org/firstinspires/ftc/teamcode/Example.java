@@ -172,7 +172,7 @@ public class Example extends OpMode{
         if (gamepad2.dpad_up)
             Launcher.setPosition(1);
         else
-            Launcher.setPosition(.3);
+            Launcher.setPosition(0);
 
         if(gamepad2.right_bumper){
             //Claw Open
@@ -187,16 +187,16 @@ public class Example extends OpMode{
 
         if (gamepad2.x) {
 
-            Wrist.setPosition(0.17 );
+            Wrist.setPosition(.07);
         }
 
          else if (gamepad2.b) {
 
-            Wrist.setPosition(0.4);
+            Wrist.setPosition(0.55);
         }
 
          else {
-             Wrist.setPosition(0.5);
+             Wrist.setPosition(.55);
         }
 
 

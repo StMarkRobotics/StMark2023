@@ -188,7 +188,7 @@ public class Blue_outo extends LinearOpMode {
 
         // Push telemetry to the Driver Station.
         telemetry.update();
-        sleep(5000);
+        sleep(3000);
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.

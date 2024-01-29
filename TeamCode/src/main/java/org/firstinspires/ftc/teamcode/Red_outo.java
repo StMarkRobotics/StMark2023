@@ -362,7 +362,9 @@ public class Red_outo extends LinearOpMode {
 
                 telemetry.addData("Direction", "left");
 
-                Wrist.setPosition(.2);
+                Wrist.setPosition(.4);
+
+                sleep(1000);
 
                 Motor1.setPower(.2);
                 Motor3.setPower(-.2);

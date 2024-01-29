@@ -192,7 +192,7 @@ public class Example extends OpMode{
 
          else if (gamepad2.b) {
 
-            Wrist.setPosition(0.55);
+            Wrist.setPosition(0.7);
         }
 
          else {
